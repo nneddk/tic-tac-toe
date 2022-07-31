@@ -34,15 +34,22 @@ const gameBoardTiles = (()=>{
                     tiles.style.transform = 'scale(0.7)';
                     whoseTurn = ++whoseTurn % 2;
                     tiles.textContent = setTile(rCoord, cCoord);
-                    console.log(bestMove());
 
-                                       
+                    if (checkBoard(gBoard) == 10){
+                        gameOver = true;
+                    }else if(checkBoard(gBoard) == -10){
+                        gameOver = true;
+                    }
+
+                                   
                     setTimeout(() => {
                         if (whoseTurn){
                             
                             robotRandTurn();
                         } 
                     }, 500);
+
+                    
                     
                 }
                 
