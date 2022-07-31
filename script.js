@@ -34,22 +34,18 @@ const gameBoardTiles = (()=>{
                     tiles.style.transform = 'scale(0.7)';
                     whoseTurn = ++whoseTurn % 2;
                     tiles.textContent = setTile(rCoord, cCoord);
-                    
+                    console.log(bestMove());
 
-                    
+                                       
                     setTimeout(() => {
                         if (whoseTurn){
                             
                             robotRandTurn();
                         } 
                     }, 500);
-                    if (checkBoard(gBoard) == 10){
-                        gameOver = true;
-                    }else if(checkBoard(gBoard) == -10){
-                        gameOver = true;
-                    }
                     
                 }
+                
                 clicked = true;
             }
 
@@ -64,8 +60,9 @@ const gameBoardTiles = (()=>{
         let randR = getRandomInt();
         let randC = getRandomInt(); 
         let aiTile = aiBoard[randR][randC];
-        if (bestMove() != -1){
-            ranTile[bestMove()].click();
+        let moveLook = bestMove();
+        if (moveLook != -1){
+            ranTile[moveLook].click();
         }else if(aiTile!= '_'){
             ranTile[aiTile].click();
         }else{
@@ -88,13 +85,17 @@ const gameBoardTiles = (()=>{
     const bestMove = () => {
         let winActive = false;
         aiMove = [-1,-1];
+        pMove = [-1, -1];
+        let best = -1000;
         //see if player is winning
         for (let i = 0; i<3; i++){
             for (let j = 0; j<3; j++){
                 if (gBoard[i][j] == '_'){
                     gBoard[i][j] = opponent;
                     if (checkBoard(gBoard) == -10){
+                        console.log (i+':'+j);
                         winActive = true;
+                        console.log('o is winning at'+i+':'+j);
                         aiMove[0] = i;
                         aiMove[1] = j;
                     }
@@ -103,9 +104,11 @@ const gameBoardTiles = (()=>{
                 if (gBoard[i][j] == '_'){
                 gBoard[i][j] = player;
                 if (checkBoard(gBoard) == 10){
-                    winActive = true;
-                    aiMove[0] = i;
-                    aiMove[1] = j;
+                        console.log (i+':'+j);
+                        winActive = true;
+                        console.log('x is winning at'+i+':'+j);
+                        aiMove[0] = i;
+                        aiMove[1] = j;    
                 }
                 gBoard[i][j] = '_'
                 }
@@ -113,9 +116,9 @@ const gameBoardTiles = (()=>{
             }
         }
         if (winActive){
-            return aiBoard[aiMove[0]][aiMove[1]]; 
+            return aiBoard[aiMove[0]][aiMove[1]];
         }
-        else return -1;
+        return -1;
         
         
 
