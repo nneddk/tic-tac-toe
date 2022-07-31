@@ -44,9 +44,9 @@ const gameBoardTiles = (()=>{
                         } 
                     }, 500);
                     if (checkBoard(gBoard) == 10){
-                        console.log('gameOver');
+                        gameOver = true;
                     }else if(checkBoard(gBoard) == -10){
-                        console.log('gameOver');
+                        gameOver = true;
                     }
                     
                 }
@@ -57,7 +57,7 @@ const gameBoardTiles = (()=>{
         }
         
     }
-
+    
     const robotRandTurn = () =>{
         
         let ranTile = document.querySelectorAll('.tile');
@@ -94,7 +94,6 @@ const gameBoardTiles = (()=>{
                 if (gBoard[i][j] == '_'){
                     gBoard[i][j] = opponent;
                     if (checkBoard(gBoard) == -10){
-                        console.log('o is winning at : '+i+':'+j);
                         winActive = true;
                         aiMove[0] = i;
                         aiMove[1] = j;
@@ -104,7 +103,6 @@ const gameBoardTiles = (()=>{
                 if (gBoard[i][j] == '_'){
                 gBoard[i][j] = player;
                 if (checkBoard(gBoard) == 10){
-                    console.log('x is winning at : '+i+':'+j);
                     winActive = true;
                     aiMove[0] = i;
                     aiMove[1] = j;
