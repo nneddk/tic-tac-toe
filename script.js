@@ -93,9 +93,7 @@ const gameBoardTiles = (()=>{
                 if (gBoard[i][j] == '_'){
                     gBoard[i][j] = opponent;
                     if (checkBoard(gBoard) == -10){
-                        console.log (i+':'+j);
                         winActive = true;
-                        console.log('o is winning at'+i+':'+j);
                         aiMove[0] = i;
                         aiMove[1] = j;
                     }
@@ -104,9 +102,7 @@ const gameBoardTiles = (()=>{
                 if (gBoard[i][j] == '_'){
                 gBoard[i][j] = player;
                 if (checkBoard(gBoard) == 10){
-                        console.log (i+':'+j);
                         winActive = true;
-                        console.log('x is winning at'+i+':'+j);
                         aiMove[0] = i;
                         aiMove[1] = j;    
                 }
