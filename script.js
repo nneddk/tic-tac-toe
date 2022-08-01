@@ -129,9 +129,6 @@ const gameBoardTiles = (()=>{
             
             }
         } 
-        if (!pOrder){
-            robotRandTurn();
-        }
     } 
     
     const robotRandTurn = () =>{
@@ -254,6 +251,9 @@ const gameBoardTiles = (()=>{
             gameBoard.removeChild(gameBoard.lastChild);
           }
         makeTiles();
+        if (!pOrder){
+            robotRandTurn();
+        }
     }
     return{make};
 })();
