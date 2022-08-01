@@ -13,7 +13,6 @@ const result = document.getElementById('result');
 const wrapper = document.getElementById('wrapper');
 let enabled = false;
 let aiOn = false;
-let pOrder = true;
 twoPlayer.onclick = function(){
     aiOn = false;
     gameBoardTiles.make();
@@ -35,13 +34,13 @@ showOrder.onclick = function(){
 }
 selX.onclick = function(){ 
     aiOn = true;
-    pOrder = true;
+    let pOrder = true;
     gameBoardTiles.make();
     wrapper.style.display = 'none';
 }
 selO.onclick = function(){
     aiOn = true;
-    pOrder = false;
+    let pOrder = false;
     gameBoardTiles.make();
     wrapper.style.display = 'none';
 
@@ -251,10 +250,10 @@ const gameBoardTiles = (()=>{
             gameBoard.removeChild(gameBoard.lastChild);
           }
         makeTiles();
-        if (!pOrder){
+    }
+    if (!pOrder){
             robotRandTurn();
         }
-    }
     return{make};
 })();
 gameBoardTiles.make(false, true);
