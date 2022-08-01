@@ -82,48 +82,51 @@ const gameBoardTiles = (()=>{
             let rCoord = i;
             let cCoord = j;
             tileHolder.appendChild(tiles);
-
-            tileHolder.onclick = function(){ 
+            //timeout for antispam
+            setTimeout(() => {
+                tileHolder.onclick = function(){ 
                 
-                //can only set it once
-                if(!clicked&&!gameOver){    
-                    tiles.style.transform = 'scale(0.7)';
-                    whoseTurn = ++whoseTurn % 2;
-                    tiles.textContent = setTile(rCoord, cCoord);
-                    //check tie;
-                    if (turns == 8){
-                        if (checkBoard(gBoard) != 10 || checkBoard(gBoard) != -10){
+                    //can only set it once
+                    if(!clicked&&!gameOver){    
+                        tiles.style.transform = 'scale(0.7)';
+                        whoseTurn = ++whoseTurn % 2;
+                        tiles.textContent = setTile(rCoord, cCoord);
+                        //check tie;
+                        if (turns == 8){
+                            if (checkBoard(gBoard) != 10 || checkBoard(gBoard) != -10){
+                                gameOver = true;
+                                showResult();
+                            }
+                        }//check if someone has already won 
+                        if (checkBoard(gBoard) == 10){
+                            showResult('X');
                             gameOver = true;
-                            showResult();
-                        }
-                    }//check if someone has already won 
-                    if (checkBoard(gBoard) == 10){
-                        showResult('X');
-                        gameOver = true;
-                    }else if(checkBoard(gBoard) == -10){
-                        showResult('O');
-                        gameOver = true;
-                    }//checks if auto move is on 
-                    if (aiOn){
-                        
-                        setInterval(() => {
-                            if(pOrder){
-                                if (whoseTurn){
-                                    robotRandTurn();
-                                }
-                            }
-                            else{
-                                if(!whoseTurn){
-                                    robotRandTurn();
-                                }
-                            }
+                        }else if(checkBoard(gBoard) == -10){
+                            showResult('O');
+                            gameOver = true;
+                        }//checks if auto move is on 
+                        if (aiOn){
                             
-                        }, 500);
+                            setTimeout(() => {
+                                if(pOrder){
+                                    if (whoseTurn){
+                                        robotRandTurn();
+                                    }
+                                }
+                                else{
+                                    if(!whoseTurn){
+                                        robotRandTurn();
+                                    }
+                                }
+                                
+                            }, 500);
+                        }
+                        turns++                                       
                     }
-                    turns++                                       
+                    clicked = true;
                 }
-                clicked = true;
-            }
+            }, 200);
+            
             }
         } 
         if (!pOrder&&aiOn){
