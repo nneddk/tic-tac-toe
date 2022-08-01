@@ -129,7 +129,7 @@ const gameBoardTiles = (()=>{
             
             }
         } 
-        if (!pOrder&&aiOn){
+        if (!pOrder){
             robotRandTurn();
         }
     } 
