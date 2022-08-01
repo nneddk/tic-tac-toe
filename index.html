@@ -1,28 +1,42 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang='en'>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset='UTF-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
     <script src = './script.js' defer></script>
     <link rel = 'stylesheet' href = './styles.css'>
     <title>Tic-Tac-Toe</title>
 </head>
 <body>
     <div class = 'header'>tic-tac-toe</div>
-    <div class = 'content'>
-        <div id = 'game-board'>
+    <div id = 'wrapper'>
+        <div id = 'result'></div>
+        <div id = 'play-wrap'>
+            <div class = 'player-select'>
+                    <button type = 'button' id = 'one-player' class = 'select-button'>1P</button>
+                <button type = 'button' id = 'two-player' class = 'select-button'>2P</button>
+            </div>
+            <div class = 'player-select' id = 'order'>
+                <button type = 'button' id = 'select-x' class = 'select-button'>X</button>
+                <button type = 'button' id = 'select-o' class = 'select-button'>O</button>
 
+            </div>
         </div>
+    </div>
+
+        <div class = 'content'>
+            <div id = 'game-board'></div>
         <!--
         <div id = 'player'>
-            <input type ="checkbox" id = 'cbai' value = 'ai'> ai
+            <input type ='checkbox' id = 'cbai' value = 'ai'> ai
             <button type = 'button' id = 'px' class = 'pbutton'>x</button>
             <button type = 'button' id = 'po' class = 'pbutton'>o</button>
         </div>
         -->
         
     </div>
+
     <div class = 'footer'>nneddk</div>
 </body>
 </html>

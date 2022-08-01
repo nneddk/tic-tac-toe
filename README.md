@@ -2,4 +2,4 @@
 tic-tac-toe repository
 
 #
-working on minimax algo
+its not perfect but it sorta works? i guess?
