@@ -12,10 +12,10 @@ const btnBar = document.getElementById('order');
 const result = document.getElementById('result');
 const wrapper = document.getElementById('wrapper');
 let enabled = false;
-let aiOn = false;
 twoPlayer.onclick = function(){
-    aiOn = false;
-    gameBoardTiles.make();
+    let aiOn = false;
+    let pOrder = true;
+    gameBoardTiles.make(aiOn, pOrder);
     wrapper.style.display = 'none';
 }
 
@@ -33,15 +33,15 @@ showOrder.onclick = function(){
     }
 }
 selX.onclick = function(){ 
-    aiOn = true;
+    let aiOn = true;
     let pOrder = true;
-    gameBoardTiles.make();
+    gameBoardTiles.make(aiOn, pOrder);
     wrapper.style.display = 'none';
 }
 selO.onclick = function(){
-    aiOn = true;
+    let aiOn = true;
     let pOrder = false;
-    gameBoardTiles.make();
+    gameBoardTiles.make(aiOn, pOrder);
     wrapper.style.display = 'none';
 
 }
@@ -69,7 +69,7 @@ const gameBoardTiles = (()=>{
     //checks whose turn it is to move;
     let whoseTurn = 0;
     //this creates the divs
-    const makeTiles = () =>{     
+    const makeTiles = (aiOn, pOrder) =>{     
         //rows creation
         for (let i = 0; i<3; i++){
             for (let j = 0; j<3; j++ ){
@@ -125,9 +125,11 @@ const gameBoardTiles = (()=>{
                     clicked = true;
                 }
             }, 200);
-            
             }
-        } 
+        }
+        if (!pOrder){
+            robotRandTurn();
+            } 
     } 
     
     const robotRandTurn = () =>{
@@ -251,9 +253,7 @@ const gameBoardTiles = (()=>{
           }
         makeTiles();
     }
-    if (!pOrder){
-            robotRandTurn();
-        }
+   
     return{make};
 })();
 gameBoardTiles.make(false, true);
