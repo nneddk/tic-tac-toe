@@ -46,11 +46,6 @@ selO.onclick = function(){
     wrapper.style.display = 'none';
 
 }
-/*Create new board, for use later
-while (gameBoard.hasChildNodes()) {
-            gameBoard.removeChild(gameBoard.lastChild);
-          } */
-
 //creates the game board
 const gameBoardTiles = (()=>{
     
@@ -73,6 +68,7 @@ const gameBoardTiles = (()=>{
     const makeTiles = () =>{     
         //rows creation
         for (let i = 0; i<3; i++){
+            //columns creation
             for (let j = 0; j<3; j++ ){
             let tileHolder = document.createElement('div');
             gameBoard.appendChild(tileHolder);
@@ -118,22 +114,19 @@ const gameBoardTiles = (()=>{
                             }
                         }
                     }, 500);
-                    
                     turns++                                       
                 }
                 clicked = true;
             }
-            
             }
         } 
         if (!pOrder){
             robotRandTurn();
         }
     } 
-    
     const robotRandTurn = () =>{
         let ranTile = document.querySelectorAll('.tile');
-        if (turns < 9){
+        if (turns < 9&&aiOn){
         let randR = getRandomInt();
         let randC = getRandomInt(); 
         let aiTile = aiBoard[randR][randC];
@@ -145,10 +138,8 @@ const gameBoardTiles = (()=>{
         }else{
             robotRandTurn();
         }
-        }
-        
+        } 
     }
-    
     //setting x/o on tiles on click
     const setTile = (r, c) =>{
         if(whoseTurn){
@@ -162,9 +153,6 @@ const gameBoardTiles = (()=>{
         }   
     }
     const bestMove = () => {
-        
-        aiMove = [-1,-1];
-        pMove = [-1, -1];
         let best = -1;
         //see if player is winning
         for (let i = 0; i<3; i++){
@@ -196,15 +184,13 @@ const gameBoardTiles = (()=>{
                 return -10;
                 if (board[counter][0] == player)
                 return +10;
-                
             }
             //check columns
             if (board[0][counter] == board[1][counter] && board[1][counter] == board[2][counter]){
                 if (board[0][counter] == opponent)
                 return -10;
                 if (board[0][counter] == player)
-                return +10;
-                
+                return +10; 
             }
         }
         //check diagonal
@@ -213,8 +199,6 @@ const gameBoardTiles = (()=>{
             return -10;
             if (board[0][0] == player)
             return +10;
-            
-            
         }
         if (board[0][2] == board[1][1] && board[1][1] == board[2][0]){
             if (board[0][2] == opponent)
@@ -254,4 +238,4 @@ const gameBoardTiles = (()=>{
     }
     return{make};
 })();
-gameBoardTiles.make(false, true);
+gameBoardTiles.make();
