@@ -121,12 +121,15 @@ const gameBoardTiles = (()=>{
             }
         } 
         if (!pOrder){
-            robotRandTurn();
+            let ranTile = document.querySelectorAll('.tile');
+            ranTile[4].click();
         }
     } 
     const robotRandTurn = () =>{
         let ranTile = document.querySelectorAll('.tile');
-        if (turns < 9&&aiOn){
+        if (turns == 1 && aiOn && ranTile[4]!= '_'){
+            ranTile[4].click();
+        }else if (turns < 9&&aiOn){
         let randR = getRandomInt();
         let randC = getRandomInt(); 
         let aiTile = aiBoard[randR][randC];
