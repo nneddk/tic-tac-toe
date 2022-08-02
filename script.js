@@ -120,7 +120,7 @@ const gameBoardTiles = (()=>{
             }
             }
         } 
-        if (!pOrder){
+        if (!pOrder&&aiOn){
             let ranTile = document.querySelectorAll('.tile');
             ranTile[4].click();
         }
@@ -131,7 +131,7 @@ const gameBoardTiles = (()=>{
             console.log('click');
             console.log(aiBoard);
             ranTile[4].click();
-        }else if (turns < 9&&aiOn){
+        }else if (turns < 9 && aiOn){
         let randR = getRandomInt();
         let randC = getRandomInt(); 
         let aiTile = aiBoard[randR][randC];
