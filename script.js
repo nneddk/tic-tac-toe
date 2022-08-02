@@ -83,49 +83,46 @@ const gameBoardTiles = (()=>{
             let cCoord = j;
             tileHolder.appendChild(tiles);
             //timeout for antispam
-            setTimeout(() => {
-                tileHolder.onclick = function(){ 
+            tileHolder.onclick = function(){ 
                 
-                    //can only set it once
-                    if(!clicked&&!gameOver){    
-                        tiles.style.transform = 'scale(0.7)';
-                        whoseTurn = ++whoseTurn % 2;
-                        tiles.textContent = setTile(rCoord, cCoord);
-                        //check tie;
-                        if (turns == 8){
-                            if (checkBoard(gBoard) != 10 || checkBoard(gBoard) != -10){
-                                gameOver = true;
-                                showResult();
-                            }
-                        }//check if someone has already won 
-                        if (checkBoard(gBoard) == 10){
-                            showResult('X');
+                //can only set it once
+                if(!clicked&&!gameOver){    
+                    tiles.style.transform = 'scale(0.7)';
+                    whoseTurn = ++whoseTurn % 2;
+                    tiles.textContent = setTile(rCoord, cCoord);
+                    //check tie;
+                    if (turns == 8){
+                        if (checkBoard(gBoard) != 10 || checkBoard(gBoard) != -10){
                             gameOver = true;
-                        }else if(checkBoard(gBoard) == -10){
-                            showResult('O');
-                            gameOver = true;
-                        }//checks if auto move is on 
-                        if (aiOn){
-                            
-                            setTimeout(() => {
-                                if(pOrder){
-                                    if (whoseTurn){
-                                        robotRandTurn();
-                                    }
-                                }
-                                else{
-                                    if(!whoseTurn){
-                                        robotRandTurn();
-                                    }
-                                }
-                                
-                            }, 500);
+                            showResult();
                         }
-                        turns++                                       
-                    }
-                    clicked = true;
+                    }//check if someone has already won 
+                    if (checkBoard(gBoard) == 10){
+                        showResult('X');
+                        gameOver = true;
+                    }else if(checkBoard(gBoard) == -10){
+                        showResult('O');
+                        gameOver = true;
+                    }//checks if auto move is on 
+                    setTimeout(() => {
+                        if (aiOn){
+                            if(pOrder){
+                                if (whoseTurn){
+                                    robotRandTurn();
+                                }
+                            }
+                            else{
+                                if(!whoseTurn){
+                                    robotRandTurn();
+                                }
+                            }
+                        }
+                    }, 500);
+                    
+                    turns++                                       
                 }
-            }, 200);
+                clicked = true;
+            }
             
             }
         } 
@@ -135,8 +132,8 @@ const gameBoardTiles = (()=>{
     } 
     
     const robotRandTurn = () =>{
-        if (turns <9&&aiOn){
         let ranTile = document.querySelectorAll('.tile');
+        if (turns < 9){
         let randR = getRandomInt();
         let randC = getRandomInt(); 
         let aiTile = aiBoard[randR][randC];
