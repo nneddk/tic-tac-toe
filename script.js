@@ -127,7 +127,9 @@ const gameBoardTiles = (()=>{
     } 
     const robotRandTurn = () =>{
         let ranTile = document.querySelectorAll('.tile');
-        if (turns == 1 && aiOn && ranTile[4]!= '_'){
+        if (turns == 1 && aiOn && aiBoard[1][1] != '_'){
+            console.log('click');
+            console.log(aiBoard);
             ranTile[4].click();
         }else if (turns < 9&&aiOn){
         let randR = getRandomInt();
